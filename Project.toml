@@ -11,10 +11,12 @@ cliquer_jll = "3c0ef3d7-c8db-52c0-a794-17abeb0e3f8d"
 [compat]
 Graphs = "1"
 Libdl = "1"
+cliquer_jll = "1.21.0"
 julia = "1.6.7"
 
 [extras]
+IterTools = "c8e1da08-722c-5040-9ed9-7db0dc04731e"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["Test", "IterTools"]
