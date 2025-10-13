@@ -1,9 +1,4 @@
-# Cliquer
-
-[![Build Status](https://github.com/dstahlke/Cliquer.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/dstahlke/Cliquer.jl/actions/workflows/CI.yml?query=branch%3Amain)
-
-[![](https://img.shields.io/badge/docs-stable-blue.svg)](https://dstahlke.github.io/Cliquer.jl/stable)
-[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://dstahlke.github.io/Cliquer.jl/dev)
+# Cliquer.jl
 
 Julia bindings for [Cliquer](https://users.aalto.fi/~pat/cliquer.html).
 This finds cliques or independent sets in (possibly weighted) graphs.  It is much faster than the
@@ -23,3 +18,10 @@ clique finder in Graphs.jl.
      [4, 5]
      [1, 2]
      [1, 5]
+
+## Reference
+
+```@autodocs
+Modules = [Cliquer]
+Private = false
+```
