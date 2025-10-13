@@ -1,6 +1,6 @@
 name = "Cliquer"
 uuid = "de97a3fd-3e70-4f7d-9cd1-f8dda99baab4"
-version = "1.0.0-DEV"
+version = "1.0.0"
 authors = ["Dan Stahlke"]
 
 [deps]
