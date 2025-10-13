@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/dstahlke/Cliquer.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/dstahlke/Cliquer.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
-Julia wrapper for [Cliquer](https://users.aalto.fi/~pat/cliquer.html).
+Julia bindings for [Cliquer](https://users.aalto.fi/~pat/cliquer.html).
 This finds cliques or independent sets in (possibly weighted) graphs.  It is much faster than the
 clique finder in Graphs.jl.
 
