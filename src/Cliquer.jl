@@ -1,7 +1,7 @@
 module Cliquer
 
 export find_single_clique, find_all_cliques
-export find_single_independent_sets, find_all_independent_sets
+export find_single_independent_set, find_all_independent_sets
 
 using cliquer_jll, Graphs, Libdl
 
@@ -164,10 +164,10 @@ end
 
 """
 
-    find_single_independent_sets(g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,Function}=false, minweight::Integer=0, maxweight::Integer=0, maximal::Bool=true, weights::Vector{<:Integer}=Vector{Int32}())
+    find_single_independent_set(g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,Function}=false, minweight::Integer=0, maxweight::Integer=0, maximal::Bool=true, weights::Vector{<:Integer}=Vector{Int32}())
 Equivalent to `find_single_clique(complement(g))`.
 """
-function find_single_independent_sets(g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,Function}=false, minweight::Integer=0, maxweight::Integer=0, maximal::Bool=true, weights::Vector{<:Integer}=Vector{Int32}())
+function find_single_independent_set(g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,Function}=false, minweight::Integer=0, maxweight::Integer=0, maximal::Bool=true, weights::Vector{<:Integer}=Vector{Int32}())
     find_single_clique(complement(g); verbose=verbose, minweight=minweight, maxweight=maxweight, maximal=maximal, weights=weights)
 end
 
