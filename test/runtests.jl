@@ -43,4 +43,16 @@ end
     @test sort(find_all_independent_sets(cube13_graph())) == baseline_cliques(cube13_graph() |> complement)
     @test sort(find_all_cliques(queens_graph(8,8))) == baseline_cliques(queens_graph(8,8))
     @test sort(find_all_independent_sets(queens_graph(8,8))) == baseline_cliques(queens_graph(8,8) |> complement)
+    @test find_all_cliques(complete_graph(0)) == [Vector{Int64}()]
+    @test find_all_cliques(complete_graph(0), minweight=1) == []
+    @test find_all_independent_sets(complete_graph(0)) == [Vector{Int64}()]
+    @test find_all_independent_sets(complete_graph(0), minweight=1) == []
+    @test find_single_clique(complete_graph(0)) == Vector{Int64}()
+    @test find_single_clique(complete_graph(0), minweight=1) == nothing
+    @test find_single_independent_set(complete_graph(0)) == Vector{Int64}()
+    @test find_single_independent_set(complete_graph(0), minweight=1) == nothing
+    @test find_single_clique(complete_graph(5)) == [1,2,3,4,5]
+    @test find_single_clique(complete_graph(5), minweight=6) == nothing
+    @test find_single_independent_set(complement(complete_graph(5))) == [1,2,3,4,5]
+    @test find_single_independent_set(complement(complete_graph(5)), minweight=6) == nothing
 end

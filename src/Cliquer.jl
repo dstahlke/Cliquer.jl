@@ -97,8 +97,17 @@ If `minweight=0`, it searches for maximum-weight cliques.  If `maxweight=0`,
 there is no upper limit.  If `verbose=true`, progess messages will display; if
 `verbose` is a function, that function gets called for every recursion with a
 named tuple of status fields.
+
+Returns `nothing` if there is no clique matching the criteria.
 """
-function find_single_clique(g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,Function}=false, minweight::Integer=0, maxweight::Integer=0, maximal::Bool=true, weights::Vector{<:Integer}=Vector{Int32}())
+function find_single_clique(g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,Function}=false, minweight::Integer=0, maxweight::Integer=0, maximal::Bool=true, weights::Vector{<:Integer}=Vector{Int32}())::Union{Vector{Int64}, Nothing}
+    if nv(g) == 0 # this case not handled by cliquer
+        if minweight == 0
+            return Vector{Int64}()
+        else
+            return nothing
+        end
+    end
     ctx = CliquerContext(s->nothing, g, verbose, weights)
     minweight = Cint(minweight)
     maxweight = Cint(maxweight)
@@ -110,9 +119,13 @@ function find_single_clique(g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,F
         GC.@preserve ctx s = @ccall l.clique_find_single(ctx.graphhandle::Ptr{Cvoid},
             minweight::Cint, maxweight::Cint, maximal::Cint, ctx.optshandle::Ptr{Cvoid})::Ptr{SetElement}
     end
-    v = vertices(g)[set_to_bitvec(s)]
-    @ccall l.wrap_set_free(s::Ptr{SetElement})::Cvoid
-    return v
+    if s == C_NULL
+        return nothing
+    else
+        v = vertices(g)[set_to_bitvec(s)]
+        @ccall l.wrap_set_free(s::Ptr{SetElement})::Cvoid
+        return v
+    end
 end
 
 """
@@ -128,6 +141,14 @@ there is no upper limit.  If `verbose=true`, progess messages will display; if
 named tuple of status fields.
 """
 function find_all_cliques(f::Function, g::Graphs.AbstractSimpleGraph; verbose::Union{Bool,Function}=false, minweight::Integer=0, maxweight::Integer=0, maximal::Bool=true, weights::Vector{<:Integer}=Vector{Int32}())::Int64
+    if nv(g) == 0 # this case not handled by cliquer
+        if minweight == 0
+            f(Vector{Int64}())
+            return 1
+        else
+            return 0
+        end
+    end
     ctx = CliquerContext(f, g, verbose, weights)
     minweight = Cint(minweight)
     maxweight = Cint(maxweight)
